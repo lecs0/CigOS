@@ -20,6 +20,17 @@ def collect_user_info():
     }
     return user_info
 
+
+def makeid():
+    userinfo = collect_user_info()
+    networkinfo = collect_network_info()
+
+    serial = userinfo.get("username") + "-" + userinfo.get("processor") + "-" + networkinfo.get("ip_adress") 
+    userserial = {
+        "userserial": serial
+    }
+    return userserial
+
 def collect_network_info():
     network_info = {}
     try:
@@ -65,8 +76,10 @@ def send_to_server(file_path, server_url):
 def main():
     user_info = collect_user_info()
     network_info = collect_network_info()
-    combined_info = {**user_info, **network_info}
+    serial = makeid()
+    combined_info = {**user_info, **network_info, **serial}
     save_to_json(combined_info, JSON_FILE_PATH)
     send_to_server(JSON_FILE_PATH, SERVER_URL)
+    
 if __name__ == "__main__":
     main()
